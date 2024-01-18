@@ -1,0 +1,10 @@
+/**
+  59412 입양 시각 구하기(1)
+ */
+
+SELECT HOUR(DATETIME), count(HOUR(DATETIME))
+from ANIMAL_OUTS
+where 9<=HOUR(DATETIME)
+  and HOUR(DATETIME)<=19
+group by HOUR(DATETIME)
+order by HOUR(DATETIME)
