@@ -1,0 +1,16 @@
+/**
+  131124 그룹별 조건에 맞는 식당 목록 출력하기
+ */
+
+SELECT MEMBER_PROFILE.MEMBER_NAME, REST_REVIEW.REVIEW_TEXT, date_format(REST_REVIEW.REVIEW_DATE,'%Y-%m-%d') as REVIEW_DATE
+from MEMBER_PROFILE
+         join REST_REVIEW
+              on MEMBER_PROFILE.MEMBER_ID = REST_REVIEW.MEMBER_ID
+where MEMBER_PROFILE.MEMBER_ID = (
+    select REST_REVIEW.MEMBER_ID
+    from REST_REVIEW
+    group by REST_REVIEW.MEMBER_ID
+    order by count(*) desc
+    limit 1
+    )
+order by REST_REVIEW.REVIEW_DATE, REST_REVIEW.REVIEW_TEXT
